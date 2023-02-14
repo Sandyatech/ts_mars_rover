@@ -1,38 +1,47 @@
-type RoverInstruction = 'L' | 'R' | 'M'
-type RoverDirecttion = 'N' | 'E' | 'W' | 'S';
+type RoverDirection = 'N' | 'E' | 'W' | 'S';
 type Grid = { x: number, y: number };
+
 let plateuSize: Grid = { x: 0, y: 0 };
 let currentPosition: Grid = { x: 0, y: 0 };
-let direction: string;
-let positionAftermoves: string='';
+let direction: RoverDirection;
+let positionAftermoves: string = '';
+
 export function rover(command: string) {
     if (command == undefined) throw new Error("please define the command");
     const commands: string[] = command.split('\n');
     if (commands.length < 3) throw new Error("please define the command in three lines");
-    const Grid1: number[] = commands[0].split(' ').map(Number);
-    plateuSize.x = Grid1[0];
-    plateuSize.y = Grid1[1];
+    const platedimensions: number[] = commands[0].split(' ').map(Number);
+    plateuSize.x = platedimensions[0];
+    plateuSize.y = platedimensions[1];
     positionAftermoves = '';
     for (let i = 1; i < commands.length; i += 2) {
-        roverPosition(commands[i]);
+        if (!roverPosition(commands[i]))
+            return 'Improper direction instruction'
         for (const movement of commands[i + 1])
-            move(movement);
+            if (!move(movement))
+                return 'Improper Left,Right,Move instruction'
         if (isValidPosition())
-            positionAftermoves += `${currentPosition.x} ${currentPosition.y} ${direction}`;
+            positionAftermoves += `${currentPosition.x} ${currentPosition.y} ${direction}${(((i + 2) === commands.length) ? "" : "\n")}`;
         else
             positionAftermoves = 'Out of Boundary Instruction';
     }
     return positionAftermoves;
 }
 
-function roverPosition(command: string) {
+function roverPosition(command: string): boolean {
     const pos: number[] = command.replace(/^[a-z]+$/g, '').split(' ').map(Number);
-    direction = command.replace(/[0-9]\s+/g, '');
+    const dir: string = <RoverDirection>command.replace(/[0-9]\s+/g, '');
+    if (!isValidDirection(dir))
+        return false;
+    direction = <RoverDirection>(dir);
     currentPosition.x = pos[0];
     currentPosition.y = pos[1];
+    return true;
 }
 
-function move(movement: string) {
+function move(movement: string): boolean {
+    if (!isValidMoveInstruction(movement))
+        return false
     switch (movement) {
         case 'L':
             turnLeft();
@@ -44,7 +53,7 @@ function move(movement: string) {
             moveForward();
             break;
     }
-
+    return true;
 }
 
 function turnLeft() {
@@ -103,4 +112,19 @@ function isValidPosition() {
         return false;
     return true;
 }
+
+function isValidDirection(input: string): boolean {
+    if (['N', 'E', 'W', 'S'].includes(input))
+        return true;
+    return false;
+
+}
+
+function isValidMoveInstruction(input: string): boolean {
+    if (['L', 'R', 'M'].includes(input))
+        return true;
+    return false;
+
+}
+
 
