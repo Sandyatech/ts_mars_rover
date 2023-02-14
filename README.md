@@ -1,9 +1,11 @@
-This is a TypeScript solution for the Mars rover kata. The code is not refactorized and cleaned as it was made for a test.
+This is a TypeScript solution for the Mars rover kata. 
 
 Running test:
 npm install 
 
-npm run test 
+npm install jest
+
+npm test 
 
 Task
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars. This plateau, which is curiously rectangular, must be navigated by the rovers so that their on-board cameras can get a complete view of the surrounding terrain to send back to Earth
@@ -24,10 +26,23 @@ Each rover will be finished sequentially, which means that the second rover won’
 OUTPUT
 The output for each rover should be its final coordinates and heading.
 
-EXAMPLE
-Test Input:
-5 5 1 2 N LMLMLMLMM 3 3 E MMRMMRMRRM
+Example Test Case
 
-Expected output:
-1 3 N 5 1 E
+Lines of Input to the Program:
+5 5
+
+1 2 N
+
+LMLMLMLMM
+
+3 3 E
+
+MMRMMRMRRM
+
+Expected Output:
+1 3 N
+
+5 1 E
+
+Added testcases for outofboundary, improper direction & position of Rover
 
