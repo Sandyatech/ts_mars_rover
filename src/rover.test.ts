@@ -11,7 +11,7 @@ describe('Test Rover object type', function () {
 
     it('Test Rover cannot move with out of Boundary Instruction', function () {
 
-        //@todo this will need a proper parser solution
+        
         let command = "5 5\n" + //Size of plateue.
             "1 2 N\n" +         //Start position
             "LMLMLMLMM\n" +        //Moving command.
@@ -23,7 +23,7 @@ describe('Test Rover object type', function () {
 
     it('Test Rover cannot move with Improper Left,Right,Move instruction', function () {
 
-        //@todo this will need a proper parser solution
+       
         let command = "5 5\n" + //Size of plateue.
             "1 2 N\n" +         //Start position
             "LMLMLMLMK";
@@ -33,7 +33,7 @@ describe('Test Rover object type', function () {
 
     it('Test Rover cannot move with Improper direction instruction', function () {
 
-        //@todo this will need a proper parser solution
+      
         let command = "5 5\n" + //Size of plateue.
             "1 2 K\n" +         //Start position
             "LMLMLMLM";
@@ -43,7 +43,7 @@ describe('Test Rover object type', function () {
 
     it('Test Rover move', function () {
 
-        //@todo this will need a proper parser solution
+        
         let command = "5 5\n" + //Size of plateue.
             "1 2 N\n" +         //Start position
             "LMLMLMLMM";
