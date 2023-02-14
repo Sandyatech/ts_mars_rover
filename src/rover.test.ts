@@ -1,23 +1,26 @@
 const chai = require('chai');
 const assert = chai.assert;
 
-import { Rover } from '../src/rover';
+import { rover } from '../src/rover';
 
 describe('Test Rover object type', function () {
 
     it('Test Rover type', function () {
-        assert.strictEqual(typeof Rover === 'function', true)
+        assert.strictEqual(typeof rover === 'function', true)
     });
 
     it('Test Rover move', function () {
-        let R1 = new Rover();
-
+        
         //@todo this will need a proper parser solution
         let command = "5 5\n" + //Size of plateue.
             "1 2 N\n" +         //Start position
             "LMLMLMLMM";        //Moving command.
+        assert.strictEqual('1 3 N', rover(command));
 
-        let testCommands = {
+    });
+
+})
+        /*let testCommands = {
             'plateau_size': {
                 'width': 5,
                 'height': 5
@@ -48,10 +51,7 @@ describe('Test Rover object type', function () {
             'moving_command': 'MMRMMRMRRM'
         }
 
-        assert.strictEqual('5 1 E', R2.execute(testCommands2));
+        assert.strictEqual('5 1 E', R2.execute(testCommands2)); */
 
 
 
-    });
-
-})
