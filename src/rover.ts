@@ -12,11 +12,15 @@ export function rover(command: string) {
     const Grid1: number[] = commands[0].split(' ').map(Number);
     plateuSize.x = Grid1[0];
     plateuSize.y = Grid1[1];
+    positionAftermoves = '';
     for (let i = 1; i < commands.length; i += 2) {
         roverPosition(commands[i]);
         for (const movement of commands[i + 1])
             move(movement);
-        positionAftermoves += `${currentPosition.x} ${currentPosition.y} ${direction}`;
+        if (isValidPosition())
+            positionAftermoves += `${currentPosition.x} ${currentPosition.y} ${direction}`;
+        else
+            positionAftermoves = 'Out of Boundary Instruction';
     }
     return positionAftermoves;
 }
@@ -92,5 +96,11 @@ function moveForward() {
             currentPosition.x = currentPosition.x - 1;
             break;
     }
+}
+
+function isValidPosition() {
+    if ((currentPosition.x > plateuSize.x) || (currentPosition.x < 0) || (currentPosition.y > plateuSize.y) || (currentPosition.y < 0))
+        return false;
+    return true;
 }
 
